@@ -6,8 +6,8 @@ A complete machine learning project to predict whether a customer will cancel a 
 
 - Predicts booking cancellation based on features like lead time, number of adults/children, meal plan, market segment, average price per room, etc.
 - Compares 3 feature scaling techniques: StandardScaler, MinMaxScaler, RobustScaler
-- Uses 5 outlier detection methods: Z-Score, IQR, Isolation Forest, LOF, Elliptic Envelope
-- Trains and compares 10 machine learning models:
+- Compares 5 outlier detection methods: Z-Score, IQR, Isolation Forest, LOF (Local Outlier Factor), Elliptic Envelope
+- Trains and compares 10 machine learning models across each outlier-detection method:
   - Logistic Regression
   - KNN
   - Naive Bayes
@@ -18,11 +18,15 @@ A complete machine learning project to predict whether a customer will cancel a 
   - Bagging
   - AdaBoost
   - Gradient Boosting
-- Performs hyperparameter tuning using GridSearchCV
+- Performs hyperparameter tuning using GridSearchCV for each model/outlier-method combination
 
 ## Best Result
 
-Random Forest with LOF outlier detection and StandardScaler achieved 90% accuracy.
+Elliptic Envelope + Logistic Regression achieved the highest accuracy among all tested combinations, at **67.4%**.
+
+## Known Limitation
+
+Some of the outlier-detection methods (particularly LOF and Elliptic Envelope) removed a very large portion of the dataset before the train/test split, leaving only a few hundred rows for evaluation instead of the original ~36,000. This is a known issue with the outlier-removal thresholds used and is a planned area for revisiting — a less aggressive filtering approach should allow the models to train and be evaluated on a much larger, more representative portion of the data.
 
 ## Technologies
 
@@ -46,3 +50,7 @@ Hotel Reservation.csv with features including:
 - avg_price_per_room, arrival_date, arrival_month, arrival_year
 - repeated_guest, booking_status (target)
 
+Original dataset size: 36,275 rows.
+
+## Author
+**Fatma Abdullah**
